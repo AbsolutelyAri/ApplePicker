@@ -2,7 +2,7 @@
 *   Created by: Ben Krieger
 *   Date Created: 1/31/2022
 *   
-*   Last Edited: 
+*   Last Edited: 2/7/2022
 *   Last Edited By:
 *   
 *   Description: Destroys the apple once its off screen 
@@ -22,6 +22,9 @@ public class AppleScript : MonoBehaviour
     {
         if(transform.position.y < bottomY)
         {
+            ApplePicker aScript = Camera.main.GetComponent<ApplePicker>();
+            aScript.AppleDestroyed();
+            
             Destroy(this.gameObject);
         }
     }

@@ -12,9 +12,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BasketScript : MonoBehaviour
 {
+    //Holds a reference to the score text so it can be edited
+    [Header("Set Dynamically")]
+    public Text scoreText;
+
+    private void Start()
+    {
+        GameObject scoreObject = GameObject.Find("ScoreCounter");
+        scoreText = scoreObject.GetComponent<Text>();
+        scoreText.text = "0";
+    }
 
     void Update()
     {
@@ -40,6 +51,16 @@ public class BasketScript : MonoBehaviour
         if (collidedWith.tag == "Apple")
         {
             Destroy(collidedWith);
+
+            // add 100 to the score when the apple is destroyed
+            int score = int.Parse(scoreText.text);
+            score += 100;
+            scoreText.text = score.ToString();
+
+            if(score > HighScoreScript.highScore)
+            {
+                HighScoreScript.highScore = score;
+            }
         }
     }
 }
